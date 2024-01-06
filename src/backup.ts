@@ -40,7 +40,7 @@ const dumpToFile = async (filePath: string) => {
   console.log("Dumping DB to file...");
 
   await new Promise((resolve, reject) => {
-    exec(`pg_dump -Fc --dbname=${env.BACKUP_DATABASE_URL} ${filePath}`, (error, stdout, stderr) => {
+    exec(`pg_dump -Fc --dbname="${env.BACKUP_DATABASE_URL}" "${filePath}"`, (error, stdout, stderr) => {
       if (error) {
         reject({ error: error, stderr: stderr.trimEnd() });
         return;
@@ -82,7 +82,7 @@ export const backup = async () => {
 
   const date = new Date().toISOString();
   const timestamp = date.replace(/[:.]+/g, '-');
-  const filename = `backup-${timestamp}.tar.gz`;
+  const filename = `backup-${timestamp}`;
   const filepath = path.join(os.tmpdir(), filename);
 
   await dumpToFile(filepath);
