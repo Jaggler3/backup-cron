@@ -40,7 +40,7 @@ const dumpToFile = async (filePath: string) => {
   console.log("Dumping DB to file...");
 
   await new Promise((resolve, reject) => {
-    exec(`pg_dump -Fc --dbname="${env.BACKUP_DATABASE_URL}" "${filePath}"`, (error, stdout, stderr) => {
+    exec(`pg_dump -Fc --dbname="${env.BACKUP_DATABASE_URL}" --file="${filePath}"`, (error, stdout, stderr) => {
       if (error) {
         reject({ error: error, stderr: stderr.trimEnd() });
         return;
