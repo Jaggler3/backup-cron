@@ -3,6 +3,7 @@ import { backup } from "./backup";
 import { env } from "./env";
 
 console.log("NodeJS Version: " + process.version);
+console.log("BACKUP_CRON_SCHEDULE: " + env.BACKUP_CRON_SCHEDULE);
 
 const tryBackup = async () => {
   try {
